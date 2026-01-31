@@ -6,9 +6,8 @@ export const db = mysql.createPool({
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
   port: Number(process.env.DB_PORT) || 3306,
-  ssl: {
-    rejectUnauthorized: false, // required for Railway SSL
-  },
-  waitForConnections: true,
+  ssl: { rejectUnauthorized: false },
   connectionLimit: 10,
 });
+
+console.log("DB HOST BEING USED:", process.env.DB_HOST);
