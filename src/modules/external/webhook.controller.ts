@@ -10,6 +10,5 @@ export const handleWebhook = async (req: Request, res: Response) => {
 
   await redis.set(`webhook:${eventId}`, "1", "EX", 86400);
 
-  // process event safely
   res.status(200).send("Processed");
 };

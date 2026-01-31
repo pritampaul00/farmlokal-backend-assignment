@@ -13,7 +13,6 @@ const breaker = new CircuitBreaker(axiosCall, {
   resetTimeout: 10000,
 });
 
-// ⭐ Fallback when API is down
 breaker.fallback(() => {
   return {
     data: {

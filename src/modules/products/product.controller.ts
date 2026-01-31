@@ -6,7 +6,7 @@ export const listProducts = async (req: Request, res: Response, next: NextFuncti
     const data = await getProducts(req.query);
     const response = { count: data.length, data };
     res.json(response);
-    return response; // 
+    return response; 
   } catch (err) {
     next(err);
   }
