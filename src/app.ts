@@ -13,11 +13,12 @@ const app = express();
 
 app.use(express.json());
 app.use(rateLimiter);
-app.use(metricsMiddleware); // ⭐ track request metrics
+app.use(metricsMiddleware); 
 
-/**
- * Health Check Route
- */
+app.get("/", (_req, res) => {
+  res.send("FarmLokal Backend is running 🚀");
+});
+
 app.get("/health", (_req, res) => {
   res.json({
     status: "ok",
@@ -26,40 +27,21 @@ app.get("/health", (_req, res) => {
   });
 });
 
-/**
- * Metrics Endpoint (Bonus)
- */
 app.get("/metrics", (_req, res) => {
   res.json(getMetrics());
 });
 
-/**
- * Auth Debug Route (OAuth token caching test)
- */
 app.use("/auth", authRoutes);
 
-/**
- * External API Test Route (Circuit Breaker Demo)
- */
 app.use("/external", apiRoutes);
 
-/**
- * Product API (Performance critical)
- * Request deduplication prevents duplicate DB hits
- */
 app.get(
   "/products",
   deduplicate(req => JSON.stringify(req.query), listProducts)
 );
 
-/**
- * Webhook endpoint (Idempotent handling)
- */
 app.post("/webhook", handleWebhook);
 
-/**
- * Global Error Handler
- */
 app.use(errorHandler);
 
 export default app;
