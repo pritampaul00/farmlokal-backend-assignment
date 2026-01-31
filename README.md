@@ -144,7 +144,7 @@ Includes indexes on:
 ---
 
 ## 🌱 Seed 1 Million Products
-Uses Faker to generate realistic product data.
+**Uses Faker to generate realistic product data.**
 ```
 npm run seed
 ```
